@@ -11,6 +11,8 @@ services:
       - jenkins_home:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock  # Montaje del Docker socket
     user: "0:docker"  # Usar el nombre del grupo 'docker'
+    environment:
+      SONAR_TOKEN: "${SONAR_TOKEN}"  # Variable de entorno para el token de SonarQube
     restart: always
     networks:
       - back-tier
@@ -75,7 +77,9 @@ services:
 
   sonarqube:
     container_name: sonarqube
-    image: sonarqube:lts-community
+    build:
+      context: ./sonarqube
+      dockerfile: Dockerfile
     depends_on:
       - sonar_db
     environment:
@@ -93,6 +97,7 @@ services:
     networks:
       - back-tier
     restart: always
+
 
   sonar_db:
     container_name: sonar-db

@@ -101,7 +101,7 @@ progress_bar
 
 # Clonar el repositorio de GitHub
 echo_message "📂 Clonando el repositorio..."
-run_command git clone https://github.com/fcongedo/jenkins-prometheus-grafana-sonarqube.git
+run_command git clone https://github.com/NicolasBatistelli/jenkins-prometheus-grafana-sonarqube.git
 progress_bar
 
 # Navegar al directorio del repositorio clonado

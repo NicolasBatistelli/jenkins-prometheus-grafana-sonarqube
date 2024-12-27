@@ -56,7 +56,7 @@ pipeline {
 
         stage('Análisis con SonarQube') {
             steps {
-                withSonarQubeEnv('SonarQube_server') {
+                withSonarQubeEnv('sonarqube-token') {
                     dir('app-java') {
                         sh 'mvn sonar:sonar -Dsonar.projectKey=mi-aplicacion -Dsonar.host.url=${SONARQUBE_URL} -Dsonar.login=$SONAR_AUTH_TOKEN'
                     }
