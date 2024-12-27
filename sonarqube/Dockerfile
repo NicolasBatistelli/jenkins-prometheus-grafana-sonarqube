@@ -9,10 +9,9 @@ RUN apt-get update && apt-get install -y \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Copiar el script de configuración al contenedor
+# Copiar el script de configuración
 COPY configure_sonarqube.sh /usr/local/bin/configure_sonarqube.sh
 RUN chmod +x /usr/local/bin/configure_sonarqube.sh
 
-# Modificar el punto de entrada para ejecutar SonarQube primero
-# Iniciar SonarQube y luego ejecutar el script de configuración
-ENTRYPOINT ["/bin/bash", "-c", "/opt/sonarqube/bin/sonar.sh start && /usr/local/bin/configure_sonarqube.sh"]
+# Usar el ENTRYPOINT original y ejecutar tu script después
+CMD ["/bin/bash", "-c", "/usr/local/bin/configure_sonarqube.sh && exec /opt/sonarqube/bin/linux-x86-64/sonar.sh console"]
