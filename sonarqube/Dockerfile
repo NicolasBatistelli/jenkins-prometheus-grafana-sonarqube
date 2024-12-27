@@ -1,8 +1,5 @@
 FROM sonarqube:community
 
-# Copiar el plugin personalizado
-COPY sonar-custom-plugin-1.0.jar /opt/sonarqube/extensions/
-
 # Instalar herramientas necesarias
 USER root
 RUN apt-get update && apt-get install -y \
