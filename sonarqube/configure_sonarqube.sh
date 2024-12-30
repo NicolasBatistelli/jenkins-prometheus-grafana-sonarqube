@@ -7,9 +7,9 @@ TOKEN_NAME="jenkins-token"
 USERNAME="admin"
 
 # Esperar a que SonarQube esté disponible
-until curl -s "$SONAR_URL/api/system/status" | grep -q "UP"; do
-  echo "Esperando a que SonarQube esté disponible..."
-  sleep 5
+until curl -s "$SONAR_URL/api/system/status" | jq -e '.status' | grep -q "UP"; do
+    echo "Esperando a que SonarQube esté disponible..."
+    sleep 5
 done
 
 echo "SonarQube está disponible. Configurando..."

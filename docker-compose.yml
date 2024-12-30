@@ -16,6 +16,8 @@ services:
     restart: always
     networks:
       - back-tier
+    depends_on:
+      - sonarqube
 
   ssh-agent:
     container_name: ssh-agent
