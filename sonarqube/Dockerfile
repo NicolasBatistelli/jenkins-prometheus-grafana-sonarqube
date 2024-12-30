@@ -1,4 +1,4 @@
-FROM sonarqube:latest
+FROM sonarqube:community
 
 # Instalar herramientas necesarias
 USER root
