@@ -6,7 +6,7 @@ USER root
 RUN echo 'sonarqube ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers
 
 RUN apt-get update && \
-    apt-get install -y jq curl && \
+    apt-get install -y jq curl netcat && \
     apt-get clean
 
 # Copiar el script de configuración
