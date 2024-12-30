@@ -11,4 +11,4 @@ COPY configure_sonarqube.sh /usr/local/bin/configure_sonarqube.sh
 RUN chmod +x /usr/local/bin/configure_sonarqube.sh
 
 # Usar el ENTRYPOINT original y ejecutar tu script después
-CMD ["/bin/bash", "-c", "/usr/local/bin/configure_sonarqube.sh"]
+#CMD ["/bin/bash", "-c", "/usr/local/bin/configure_sonarqube.sh"]
