@@ -6,14 +6,6 @@ NEW_PASSWORD="administrator"
 TOKEN_NAME="jenkins-token"
 USERNAME="admin"
 
-# Esperar a que SonarQube esté disponible
-until curl -s "$SONAR_URL/api/system/status" | jq -e '.status' | grep -q "UP"; do
-    echo "Esperando a que SonarQube esté disponible..."
-    sleep 5
-done
-
-echo "SonarQube está disponible. Configurando..."
-
 # Cambiar la contraseña inicial
 curl -X POST -u "$USERNAME:$OLD_PASSWORD" \
   "$SONAR_URL/api/users/change_password" \
