@@ -6,13 +6,13 @@ USER root
 RUN echo 'sonarqube ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers
 
 RUN apt-get update && \
-    apt-get install -y jq curl netcat && \
+    apt-get install -y jq curl && \
     apt-get clean
 
 # Copiar el script de configuración
 COPY configure_sonarqube.sh /usr/local/bin/configure_sonarqube.sh
-COPY wait.sh /usr/local/bin/wait.sh
-RUN chmod +x /usr/local/bin/configure_sonarqube.sh /usr/local/bin/wait.sh
+
+RUN chmod +x /usr/local/bin/configure_sonarqube.sh
 
 USER sonarqube
 # Usar el ENTRYPOINT original y ejecutar tu script después
