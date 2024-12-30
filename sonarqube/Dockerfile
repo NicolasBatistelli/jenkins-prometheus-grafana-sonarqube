@@ -16,4 +16,4 @@ RUN chmod +x /usr/local/bin/configure_sonarqube.sh /usr/local/bin/wait.sh
 
 USER sonarqube
 # Usar el ENTRYPOINT original y ejecutar tu script después
-CMD ["/bin/bash", "-c", "sleep 60 && /usr/local/bin/wait.sh && /usr/local/bin/configure_sonarqube.sh"]
+#CMD ["/bin/bash", "-c", "sleep 60 && /usr/local/bin/wait.sh && /usr/local/bin/configure_sonarqube.sh"]

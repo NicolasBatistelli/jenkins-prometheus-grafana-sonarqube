@@ -91,6 +91,7 @@ services:
       SONAR_JDBC_PASSWORD: sonar
     ports:
       - "9000:9000"
+    command: ["/bin/bash", "-c", "sleep 60 && /usr/local/bin/wait.sh && /usr/local/bin/configure_sonarqube.sh"]
     volumes:
       - sonarqube_conf:/opt/sonarqube/conf
       - sonarqube_data:/opt/sonarqube/data
