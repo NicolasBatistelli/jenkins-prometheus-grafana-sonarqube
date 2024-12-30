@@ -4,10 +4,7 @@ FROM sonarqube:community
 USER root
 RUN apt-get update && apt-get install -y \
     curl \
-    jq \
-    --no-install-recommends && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    jq
 
 # Copiar el script de configuración
 COPY configure_sonarqube.sh /usr/local/bin/configure_sonarqube.sh
