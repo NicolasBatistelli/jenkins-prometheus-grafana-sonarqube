@@ -16,5 +16,4 @@ RUN chmod +x /usr/local/bin/configure_sonarqube.sh
 
 USER sonarqube
 # Usar el ENTRYPOINT original y ejecutar tu script después
-ENTRYPOINT ["/bin/bash", "-c", "/opt/sonarqube/docker/entrypoint.sh; /usr/local/bin/configure_sonarqube.sh; tail -f /dev/null"]
-
+ENTRYPOINT ["/bin/bash", "-c", "/opt/sonarqube/docker/entrypoint.sh && /usr/local/bin/configure_sonarqube.sh && tail -f /dev/null"]
