@@ -9,11 +9,14 @@ RUN apt-get update && \
     apt-get install -y jq curl && \
     apt-get clean
 
-# Copiar el script de configuración
+# Copiar el script de configuración y el script de arranque
 COPY configure_sonarqube.sh /usr/local/bin/configure_sonarqube.sh
+COPY start.sh /usr/local/bin/start.sh
 
-RUN chmod +x /usr/local/bin/configure_sonarqube.sh
+RUN chmod +x /usr/local/bin/configure_sonarqube.sh /usr/local/bin/start.sh
 
 USER sonarqube
-# Usar el ENTRYPOINT original y ejecutar tu script después
-ENTRYPOINT ["/bin/bash", "-c", "/opt/sonarqube/docker/entrypoint.sh && /usr/local/bin/configure_sonarqube.sh && tail -f /dev/null"]
+
+# Usar el script start.sh como ENTRYPOINT
+ENTRYPOINT ["/bin/bash", "/usr/local/bin/start.sh"]
+
