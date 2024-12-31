@@ -3,12 +3,22 @@
 # Ejecuta el entrypoint original de SonarQube
 /opt/sonarqube/docker/entrypoint.sh &
 
-# Esperar un tiempo inicial (puede ser útil si el entrypoint toma tiempo en iniciar)
-sleep 60
+# Esperar a que Elasticsearch esté listo
+echo "Esperando a que Elasticsearch esté listo..."
+until curl -s http://localhost:9200/_cluster/health | grep -q '"status":"green"'; do
+  echo "Esperando... Elasticsearch aún no está listo."
+  sleep 10
+done
+
+# Esperar a que SonarQube esté listo
+echo "Esperando a que SonarQube esté listo..."
+until curl -s http://localhost:9000 | grep -q 'Log in'; do
+  echo "Esperando... SonarQube aún no está listo."
+  sleep 10
+done
 
 # Ejecuta el script de configuración una vez SonarQube esté listo
 /usr/local/bin/configure_sonarqube.sh
 
 # Mantener el contenedor en ejecución
 tail -f /dev/null
-
