@@ -18,5 +18,5 @@ RUN chmod +x /usr/local/bin/configure_sonarqube.sh /usr/local/bin/start.sh
 USER sonarqube
 
 # Usar el script start.sh como ENTRYPOINT
-ENTRYPOINT ["/bin/bash", "/usr/local/bin/start.sh"]
+CMD ["/bin/bash", "/usr/local/bin/start.sh"]
 
