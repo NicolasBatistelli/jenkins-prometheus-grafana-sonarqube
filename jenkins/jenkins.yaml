@@ -17,13 +17,16 @@ jenkins:
                 scope: GLOBAL
                 id: "SonarQube_jenkins"  # ID de la credencial
                 description: "Credenciales para SonarQube"
-                username: "admin"  # Usuario de SonarQube
-                password: "administrator"  # Contraseña de SonarQube
+                username: "admin"        # Usuario de SonarQube
+                password: "administrator" # Contraseña de SonarQube
 
-  sonarServers:
+# Configuración de SonarQube bajo el namespace correcto
+sonarQube:
+  installations:
     - name: "SonarQube_Server"
       serverUrl: "http://localhost:9000"  # URL del servidor SonarQube
-      credentialsId: "SonarQube_jenkins"  # ID de la credencial definida arriba
+      credentialsId: "SonarQube_jenkins"   # ID de la credencial definida arriba
+
 
 
   #appearance:
