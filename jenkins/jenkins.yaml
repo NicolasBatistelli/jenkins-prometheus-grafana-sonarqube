@@ -25,7 +25,8 @@ jenkins:
       serverUrl: "http://localhost:9000"  # URL del servidor SonarQube
       credentialsId: "sonarqube-credentials"  # ID de la credencial definida arriba
 
-appearance:
-  themeManager:
-    disableUserThemes: true
-    theme: "dark"
+  appearance:
+    themeManager:
+      disableUserThemes: true
+      theme: "dark"  # Asegúrate de que el tema esté soportado
+
