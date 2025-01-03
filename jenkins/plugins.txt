@@ -6,3 +6,4 @@ prometheus
 sonar
 email-ext
 github
+credentials

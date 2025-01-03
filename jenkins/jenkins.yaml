@@ -15,20 +15,20 @@ jenkins:
         - credentials:
             - usernamePassword:
                 scope: GLOBAL
-                id: "SonarQube_jenkins"  # ID de la credencial
-                description: "Credenciales para SonarQube"
-                username: "admin"        # Usuario de SonarQube
-                password: "administrator" # Contraseña de SonarQube
+                id: "SonarQube_jenkins"
+                username: "admin"
+                password: "administrator"
+                description: "Admin credentials"
 
-unclassified:
-  sonarQube:
-    installations:
-      - name: "SonarQube_Server"
-        serverUrl: "http://localhost:9000"  # URL del servidor SonarQube
-        credentialsId: "SonarQube_jenkins"   # ID de la credencial definida arriba
+  sonarServers:
+    - name: "SonarQube_Server"
+      serverUrl: "http://localhost:9000"  # URL del servidor SonarQube
+      credentialsId: "SonarQube_jenkins"  # ID de la credencial definida arriba
 
-  #appearance:
-  #  themeManager:
-  #    disableUserThemes: true
-  #    theme: "dark"
+metrics:
+  collectingPeriodInSeconds: 120  # Período de recolección de métricas en segundos
 
+#appearance:
+#  themeManager:
+#    disableUserThemes: true
+#    theme: "dark"
