@@ -1,14 +1,15 @@
+# Usar la imagen base de Jenkins LTS
 FROM jenkins/jenkins:lts
 
-# Cambiar a usuario root para instalar paquetes y configurar sudo
+# Cambiar a usuario root para realizar configuraciones necesarias
 USER root
 
-# Instalar sudo, Docker, Java 17 y Maven 3.9.9
+# Actualizar paquetes e instalar sudo, Docker, Java 17 y Maven 3.9.9
 RUN apt-get update && \
     apt-get install -y sudo docker.io openjdk-17-jdk wget curl && \
     apt-get clean
 
-# Instalar Docker Compose v2 como binario
+# Instalar Docker Compose v2
 RUN curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && \
     chmod +x /usr/local/bin/docker-compose && \
     mkdir -p /usr/lib/docker/cli-plugins && \
@@ -21,39 +22,32 @@ RUN wget https://dlcdn.apache.org/maven/maven-3/3.9.9/binaries/apache-maven-3.9.
     ln -s /opt/maven/bin/mvn /usr/bin/mvn && \
     rm apache-maven-3.9.9-bin.tar.gz
 
-# Configurar sudo para que no requiera contraseña para el usuario Jenkins
+# Configurar sudo para Jenkins
 RUN echo "jenkins ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
-# Verificar si el grupo docker existe y agregar al usuario Jenkins
-RUN getent group docker || groupadd -g 999 docker && usermod -aG docker jenkins
+# Agregar al usuario Jenkins al grupo Docker
+RUN groupadd -g 999 docker || true && usermod -aG docker jenkins
 
-# Configurar variables de entorno para Java y Maven
+# Configurar variables de entorno
 ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 ENV PATH=$JAVA_HOME/bin:$PATH
 ENV M2_HOME=/opt/maven
 ENV PATH=$M2_HOME/bin:$PATH
 
-# Copiar el archivo plugins.txt con la lista de plugins
+# Copiar el archivo plugins.txt con la lista de plugins a instalar
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 
-# Instalar los plugins de Jenkins usando jenkins-plugin-cli
+# Instalar plugins de Jenkins
 RUN jenkins-plugin-cli --plugins -f /usr/share/jenkins/ref/plugins.txt
 
 # Deshabilitar el Setup Wizard
 ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false"
 
-# Copiar el archivo jenkins.yaml para la configuración de Jenkins
+# Copiar la configuración de Jenkins (JCasC)
 COPY jenkins.yaml /var/jenkins_home/jenkins.yaml
 
-# Copiar el script de espera al contenedor
-#COPY wait-for-sonarqube.sh /usr/local/bin/wait-for-sonarqube.sh
-#RUN chmod +x /usr/local/bin/wait-for-sonarqube.sh
-
-# Asegurar que Jenkins cargue la configuración en el arranque
+# Configurar Jenkins para usar JCasC
 ENV JENKINS_CASC_JENKINS_CONFIG=/var/jenkins_home/jenkins.yaml
 
-# Usar el script como entrypoint
-#ENTRYPOINT ["/usr/local/bin/wait-for-sonarqube.sh"]
-
-# Volver al usuario Jenkins por defecto
+# Volver al usuario Jenkins
 USER jenkins
