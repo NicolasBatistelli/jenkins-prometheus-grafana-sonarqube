@@ -11,8 +11,7 @@ RUN apt-get update && \
     apt-get clean
 
 # Permitir que el usuario sonarqube ejecute sudo sin contraseña
-RUN echo "sonarqube ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/sonarqube && \
-    chmod 0440 /etc/sudoers.d/sonarqube
+RUN echo 'sonarqube ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers
 
 # Copiar el script de configuración y el script de arranque
 COPY configure_sonarqube.sh /usr/local/bin/configure_sonarqube.sh
