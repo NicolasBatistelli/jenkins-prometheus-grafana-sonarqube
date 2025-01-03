@@ -9,16 +9,16 @@ jenkins:
     loggedInUsersCanDoAnything:
       allowAnonymousRead: false
 
-  credentials:
-    system:
-      domainCredentials:
-        - credentials:
-            - usernamePassword:
-                scope: GLOBAL
-                id: "SonarQube_jenkins"  # ID de la credencial
-                description: "Credenciales para SonarQube"
-                username: "admin"  # Usuario de SonarQube
-                password: "administrator"  # Contraseña de SonarQube
+  #credentials:
+  #  system:
+  #    domainCredentials:
+  #      - credentials:
+  #          - usernamePassword:
+  #              scope: GLOBAL
+  #              id: "SonarQube_jenkins"  # ID de la credencial
+  #              description: "Credenciales para SonarQube"
+  #              username: "admin"  # Usuario de SonarQube
+  #              password: "administrator"  # Contraseña de SonarQube
 
   #sonarServers:
   #  - name: "SonarQube_Server"
