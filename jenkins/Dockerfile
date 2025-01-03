@@ -46,14 +46,14 @@ ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false"
 COPY jenkins.yaml /var/jenkins_home/jenkins.yaml
 
 # Copiar el script de espera al contenedor
-COPY wait-for-sonarqube.sh /usr/local/bin/wait-for-sonarqube.sh
-RUN chmod +x /usr/local/bin/wait-for-sonarqube.sh
+#COPY wait-for-sonarqube.sh /usr/local/bin/wait-for-sonarqube.sh
+#RUN chmod +x /usr/local/bin/wait-for-sonarqube.sh
 
 # Asegurar que Jenkins cargue la configuración en el arranque
 ENV JENKINS_CASC_JENKINS_CONFIG=/var/jenkins_home/jenkins.yaml
 
 # Usar el script como entrypoint
-ENTRYPOINT ["/usr/local/bin/wait-for-sonarqube.sh"]
+#ENTRYPOINT ["/usr/local/bin/wait-for-sonarqube.sh"]
 
 # Volver al usuario Jenkins por defecto
 USER jenkins
