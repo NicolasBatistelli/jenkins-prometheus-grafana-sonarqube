@@ -20,10 +20,10 @@ jenkins:
                 username: "admin"  # Usuario de SonarQube
                 password: "administrator"  # Contraseña de SonarQube
 
-  sonarServers:
-    - name: "SonarQube_Server"
-      serverUrl: "http://localhost:9000"  # URL del servidor SonarQube
-      credentialsId: "SonarQube_jenkins"  # ID de la credencial definida arriba
+  #sonarServers:
+  #  - name: "SonarQube_Server"
+  #   serverUrl: "http://localhost:9000"  # URL del servidor SonarQube
+  #   credentialsId: "SonarQube_jenkins"  # ID de la credencial definida arriba
 
   appearance:
     themeManager:
