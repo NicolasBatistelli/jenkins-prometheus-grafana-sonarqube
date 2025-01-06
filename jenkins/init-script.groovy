@@ -50,3 +50,4 @@ themeManagerConfig.setTheme("dark")
 
 // Guardar cambios
 instance.save()
+// test
