@@ -44,7 +44,7 @@ RUN jenkins-plugin-cli --plugins -f /usr/share/jenkins/ref/plugins.txt
 ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false"
 
 # Copiar el script Groovy de configuración
-COPY init.groovy.d/* /usr/share/jenkins/ref/init.groovy.d/
+COPY init.groovy.d/* /usr/share/jenkins/ref/init.groovy.d
 
 # Copiar la configuración de Jenkins (JCasC)
 #COPY jenkins.yaml /var/jenkins_home/jenkins.yaml
