@@ -43,14 +43,11 @@ RUN jenkins-plugin-cli --plugins -f /usr/share/jenkins/ref/plugins.txt
 # Deshabilitar el Setup Wizard
 ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false"
 
-# Copiar el script Groovy de configuración
-COPY init-script.groovy /usr/share/jenkins/ref/init.groovy.d/init-script.groovy
-
 # Copiar la configuración de Jenkins (JCasC)
-#COPY jenkins.yaml /var/jenkins_home/jenkins.yaml
+COPY jenkins.yaml /var/jenkins_home/jenkins.yaml
 
 # Configurar Jenkins para usar JCasC
-#ENV JENKINS_CASC_JENKINS_CONFIG=/var/jenkins_home/jenkins.yaml
+ENV JENKINS_CASC_JENKINS_CONFIG=/var/jenkins_home/jenkins.yaml
 
 # Volver al usuario Jenkins
 USER jenkins
