@@ -1,21 +1,23 @@
 services:
   jenkins:
     container_name: jenkins
-    image: jenkins-custom:latest  # Nombre personalizado de la imagen
+    image: jenkins-custom:latest
     build:
       context: ./jenkins/
-      dockerfile: Dockerfile  # Utiliza el Dockerfile que creaste para Jenkins
+      dockerfile: Dockerfile
     ports:
       - "8080:8080"
     volumes:
       - jenkins_home:/var/jenkins_home
-      - /var/run/docker.sock:/var/run/docker.sock  # Montaje del Docker socket
-    user: "0:docker"  # Usar el nombre del grupo 'docker'
+      - /var/run/docker.sock:/var/run/docker.sock
+    user: "0:docker"
     restart: always
     networks:
       - back-tier
     depends_on:
       - sonarqube
+    environment:
+      SONARQUBE_URL: http://sonarqube:9000
 
   ssh-agent:
     container_name: ssh-agent
