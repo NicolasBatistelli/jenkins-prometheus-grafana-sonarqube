@@ -182,7 +182,8 @@ Puedes ajustar los puertos, credenciales y volúmenes editando los archivos de c
 La carpeta `app-java` contiene una API de ejemplo con un archivo `Jenkinsfile` configurado. Esta API fue utilizada como demo para verificar que la configuración de Jenkins funciona correctamente en este entorno.
 
 ---
-📄 Documentación Adicional
+
+## 📄 Documentación Adicional
 
 Para guías detalladas sobre cómo:
 
@@ -195,6 +196,8 @@ Configurar el plugin Email-Ext con el token de Gmail.
 Configurar SonarQube con su token.
 
 Consulta la siguiente documentación: [Guía de configuración detallada (PDF)](https://drive.google.com/file/d/1iG5BS__fIuH29-NILIwoYlh7KrTspCjV/view?usp=sharing)
+
+---
 
 ## 📚 Más Información:
 
