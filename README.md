@@ -122,14 +122,14 @@ Este comando creará la red back-tier si no existe. Si ya está creada, el || tr
 2.⚙️  **Construir las Imágenes Docker**
 - A continuación, construye las imágenes de Docker. Esto descargará las últimas versiones de las dependencias y las construirá sin usar imágenes de caché:
 ```bash
-docker-compose build --pull --no-cache
+docker compose build --pull --no-cache
 ```
 Este comando construirá las imágenes de todos los servicios definidos en el archivo docker-compose.yml.
 
 3.🚀 **Iniciar los Contenedores en Segundo Plano**
 - Una vez que las imágenes estén construidas, puedes iniciar los contenedores en segundo plano ejecutando:
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 Esto levantará los contenedores definidos en docker-compose.yml en modo "desprendido" (detached), lo que significa que seguirán ejecutándose en segundo plano.
 
@@ -142,8 +142,46 @@ docker ps
 5.🛑 **Detener los Contenedores**
 - Si deseas detener los contenedores, puedes usar el siguiente comando:
 ```bash
-docker-compose down
+docker compose down -v
 ```
+
+
+## 📃 Estructura del Proyecto
+
+```
+├── Vagrant/
+├── jenkins/
+├── prometheus/
+├── grafana/
+├── sonarqube/
+├── app-java/
+├── docker-compose.yml
+└── README.md
+```
+
+---
+
+## 🚜 Solución de Problemas Comunes
+
+### Error de Recursos Insuficientes
+Asegúrate de tener al menos 4 GB de RAM y suficiente espacio en disco para la máquina virtual.
+
+### Docker No Inicia
+Verifica que Docker esté correctamente instalado en la máquina virtual y que el servicio esté en ejecución.
+
+---
+
+## 🔧 Personalización
+
+Puedes ajustar los puertos, credenciales y volúmenes editando los archivos de configuración en el directorio `Vagrant` o `docker-compose.yml`.
+
+---
+
+## 🎨 Carpeta `app-java`
+
+La carpeta `app-java` contiene una API de ejemplo con un archivo `Jenkinsfile` configurado. Esta API fue utilizada como demo para verificar que la configuración de Jenkins funciona correctamente en este entorno.
+
+---
 
 ## 📚 Más Información:
 
