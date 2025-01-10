@@ -2,7 +2,7 @@
 
 SONAR_URL="http://localhost:9000"
 OLD_PASSWORD="admin"
-NEW_PASSWORD="Adm1nistr@tor!"
+NEW_PASSWORD="Adm1nistr@tor"
 #TOKEN_NAME="jenkins-token"
 USERNAME="admin"
 

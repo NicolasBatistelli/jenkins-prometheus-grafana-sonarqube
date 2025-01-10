@@ -8,7 +8,7 @@ Vagrant.configure("2") do |config|
     desafio.vm.network "forwarded_port", guest: 9090, host: 9090  # Prometheus
     desafio.vm.network "forwarded_port", guest: 3000, host: 3000  # Grafana
     desafio.vm.network "forwarded_port", guest: 9000, host: 9000  # SonarQube
-    desafio.vm.network "forwarded_port", guest: 8081, host: 8081  # Mi aplicación
+    desafio.vm.network "forwarded_port", guest: 8085, host: 8085  # Mi aplicación
 
     # Configuración del proveedor VirtualBox
     desafio.vm.provider "virtualbox" do |vb|
