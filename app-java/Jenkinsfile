@@ -89,27 +89,27 @@ pipeline {
     }
 
     post {
-        always {
-            script {
-                // Obtener información del commit
-                def commitInfo = getCommitInfo()
-                
-                // Crear el mensaje de correo
-                def body = createEmailBody(commitInfo)
-                
-                // Subir reportes de pruebas a GitHub
-                def repoLink = uploadTestReports(commitInfo)
-                
-                // Si hay errores de pruebas, agregar link a los reportes en GitHub
-                if (repoLink) {
-                    body += """
-                        <h3>Información de los siguientes Sets de Tests:</h3>
-                        <p>Por favor, revisa los reportes completos de las pruebas en el siguiente enlace: <a href='${repoLink}'>Ver reportes</a></p>
-                    """
-                }
+    always {
+        script {
+            // Obtener información del commit
+            def commitInfo = getCommitInfo()
+            
+            // Crear el mensaje de correo
+            def body = createEmailBody(commitInfo)
+            
+            // Subir reportes de pruebas a GitHub
+            def repoLink = uploadTestReports(commitInfo)
+            
+            // Si hay errores de pruebas, agregar link a los reportes en GitHub
+            if (repoLink) {
+                body += """
+                    <h3>Información de los siguientes Sets de Tests:</h3>
+                    <p>Por favor, revisa los reportes completos de las pruebas en el siguiente enlace: <a href='${repoLink}'>Ver reportes</a></p>
+                """
+            }
 
-                // Enviar correo
-                sendEmail(body)
+            // Enviar correo
+            sendEmail(commitInfo.authorEmail, body)
             }
         }
     }
@@ -168,11 +168,11 @@ def uploadTestReports(commitInfo) {
     return "https://github.com/NicolasBatistelli/jenkins-prometheus-grafana-sonarqube/tree/reportes-tests/test-log-${date}"
 }
 
-def sendEmail(body) {
+def sendEmail(String recipientEmail, String body) {
     emailext(
         subject: "Jenkins Build #${BUILD_NUMBER} - ${currentBuild.currentResult}",
         body: body,
-        to: currentBuild.getBuildCauses()[0].userId, // Autor del commit
+        to: recipientEmail, // Usar el correo del autor del commit
         mimeType: 'text/html',
         attachmentsPattern: 'app-java/target/surefire-reports/*.txt'
     )
