@@ -54,7 +54,7 @@ pipeline {
             }
         }
 
-        /*stage('Análisis con SonarQube') {
+        stage('Análisis con SonarQube') {
             steps {
                 withSonarQubeEnv('sonarqube-token') {
                     dir('app-java') {
@@ -62,7 +62,7 @@ pipeline {
                     }
                 }
             }
-        }*/
+        }
 
         stage('Build Docker Images') {
             steps {
