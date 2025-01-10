@@ -5,7 +5,7 @@ pipeline {
         PROJECT_NAME = 'mi-aplicacion' // Nombre del proyecto
         DOCKER_PORT = '8085'
         DOCKER_COMPOSE_FILE = "${env.WORKSPACE}/app-java/docker-compose.yml"
-        SONARQUBE_URL = 'http://172.18.0.8:9000'
+        SONARQUBE_URL = "${env.SONARQUBE_URL}"
     }
 
     stages {
@@ -146,7 +146,7 @@ def uploadTestReports(commitInfo) {
 
     // Subir los reportes a GitHub
     sh "rm -rf /tmp/test-reports" // Eliminar directorio temporal si existe
-    sh "git clone -b reportes-tests https://github.com/fcongedo/jenkins-prometheus-grafana-sonarqube /tmp/test-reports" // Clonar la rama específica
+    sh "git clone -b reportes-tests https://github.com/NicolasBatistelli/jenkins-prometheus-grafana-sonarqube /tmp/test-reports" // Clonar la rama específica
     sh "cp -r ${logDir} /tmp/test-reports/"
 
     // Verificar los archivos que se subieron
@@ -157,7 +157,7 @@ def uploadTestReports(commitInfo) {
         dir('/tmp/test-reports') {
             sh "git config user.name '${commitInfo.authorName}'"
             sh "git config user.email '${commitInfo.authorEmail}'"
-            sh "git remote set-url origin https://${GITHUB_USER}:${GITHUB_PAT}@github.com/fcongedo/jenkins-prometheus-grafana-sonarqube.git"
+            sh "git remote set-url origin https://${GITHUB_USER}:${GITHUB_PAT}@github.com/NicolasBatistelli/jenkins-prometheus-grafana-sonarqube.git"
             sh 'git add .'
             sh 'git commit -m "Agregando reportes de prueba"'
             sh 'git push origin reportes-tests' // Asegúrate de usar la rama específica
@@ -165,7 +165,7 @@ def uploadTestReports(commitInfo) {
     }
 
     // Devolver enlace a la rama con los reportes
-    return "https://github.com/fcongedo/jenkins-prometheus-grafana-sonarqube/tree/reportes-tests/test-log-${date}"
+    return "https://github.com/NicolasBatistelli/jenkins-prometheus-grafana-sonarqube/tree/reportes-tests/test-log-${date}"
 }
 
 def sendEmail(body) {
